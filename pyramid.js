@@ -20,18 +20,38 @@ let circlePos = [width/2, height/2];
 let points = []; // points will be an array that contains arrays aight 
 
 let reversed = false; 
+let shape;
 
 
 let start_Time = Date.now(); 
 
 //the points and corners of our shape
-points.push([-1, -1, 0]); 
-points.push([1, -1, 0]);
-points.push([1, 1, 0]);
-points.push([-1, 1, 0]); 
+function changeShape(newShape) {
+    shape = newShape;
+    points = [];
 
-points.push([0, 0, 2]); 
-points.push([0, 0, -2]);
+    if (shape === 'pyramid') {
+        points.push([-1, -1, 0]);
+        points.push([1, -1, 0]);
+        points.push([1, 1, 0]);
+        points.push([-1, 1, 0]);
+        points.push([0, 0, 2]);
+        points.push([0, 0, -2]);
+    } else if (shape === 'cube') {
+        points.push([-1, -1, -1]);
+        points.push([1, -1, -1]);
+        points.push([1, 1, -1]);
+        points.push([-1, 1, -1]);
+        points.push([-1, -1, 1]);
+        points.push([1, -1, 1]);
+        points.push([1, 1, 1]);
+        points.push([-1, 1, 1]);
+    }
+    console.log('Shape changed to:', shape);
+}
+
+changeShape('pyramid');
+
 
 
 // const projection matrix 
