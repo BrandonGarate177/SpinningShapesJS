@@ -1,5 +1,7 @@
 const canvas = document.getElementById('pyramidCanvas'); // this is the size of the pic
 const context = canvas.getContext('2d'); // this allows us to draw the picture 
+const elapsedTimeDisplay = document.getElementById('elapsed-time');
+
 
 console.log('Canvas:', canvas);
 
@@ -25,9 +27,6 @@ let points = []; // points will be an array that contains arrays aight
 let reversed = false; 
 let shape;
 
-let fakeReversed;
-
-
 let start_Time = Date.now(); 
 
 //the points and corners of our shape
@@ -52,6 +51,7 @@ function changeShape(newShape) {
         points.push([1, 1, 1]);
         points.push([-1, 1, 1]);
     }
+
     console.log('Shape changed to:', shape);
 }
 function changeReverse(temp){
@@ -136,16 +136,24 @@ function project(points) {
         points[0] * projectionMatrix[1][0] + points[1] * projectionMatrix[1][1] 
     ];
 }
+
+
+
+
 function draw() {
     context.clearRect(0, 0, width, height);
 
-    const elapsedTime = (Date.now() - start_Time) / 1000;
+    const elapsedTime = ((Date.now() - start_Time) / 1000).toFixed(1);
+
+
 
     if (elapsedTime >= 5) {
         reversed = !reversed;
         start_Time = Date.now();
         //elapsedTime = Date.now() - start_Time;
     }
+    
+    elapsedTimeDisplay.textContent = `Elapsed Time: ${elapsedTime}s`;
 
     // const currentRotationSpeed = reversed ? -rotationSpeed : rotationSpeed;
     // angle += currentRotationSpeed;
@@ -199,4 +207,17 @@ function draw() {
     requestAnimationFrame(draw);
 }
 
+
+
+
 draw();
+
+window.addEventListener('resize', () => {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+    circlePos = [width / 2, height / 2];
+    draw();  // Redraw to ensure the shape stays centered
+});
+

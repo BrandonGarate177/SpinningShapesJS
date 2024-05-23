@@ -1,39 +1,11 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shape Rotation</title>
-    <style>
-        canvas {
-            display: block;
-            margin: 0 auto;
-            background: black;
-        }
-        #controls {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div id="controls">
-        <button onclick="changeShape('pyramid')">Pyramid</button>
-        <button onclick="changeShape('cube')">Cube</button>
-        <button onclick="changeReverse('reverse')">reverse</button>
-    </div>
-    <canvas id="pyramidCanvas" width="800" height="600"></canvas>
-
-    <script src="pyramid.js"></script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shape Rotation</title>
+
     <style>
         body, html {
             margin: 0;
@@ -57,12 +29,22 @@
             z-index: 1;
             text-align: center;
         }
+        #elapsed-time {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            /* transform: translateX(-50%); */
+            color: white;
+            font-size: 20px;
+            z-index: 1;
+        }
         button {
             padding: 10px 20px;
             margin: 5px;
             font-size: 16px;
         }
     </style>
+    
 </head>
 <body>
     <div id="controls">
@@ -71,7 +53,12 @@
         <button onclick="changeReverse('reverse')">Reverse</button>
         
     </div>
+
+    <div id="elapsed-time">Elapsed Time: 0s</div>
+
+    
     <canvas id="pyramidCanvas"></canvas>
+    
     <script src="pyramid.js"></script>
 </body>
 </html>
