@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "jsdom": "^24.0.0",
+    "mathjs": "^12.4.2",
+    "phaser": "^3.80.1"
+  }
+}
