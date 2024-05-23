@@ -6,6 +6,7 @@ console.log('Canvas:', canvas);
 const WHITE = 'rgb(255, 255, 255)';
 const BLACK = 'rgb(0,0,0)';
 const RED = 'rgb(255, 0, 0)';
+const BLUE = 'rgb(15, 15, 255)';
 
 const width = canvas.width; 
 const height = canvas.height; 
@@ -70,6 +71,7 @@ function connect_points(i, j, points){
     context.moveTo(points[i][0], points[i][1]);
     context.lineTo(points[j][0], points[j][1]); 
     context.strokeStyle = RED; // this sets the color of the lines 
+    if(reversed) context.strokeStyle = BLUE;
     context.stroke(); // this actually draws the lines 
 }
 // there is no while loop insteaad
@@ -140,6 +142,7 @@ function draw() {
     // const currentRotationSpeed = reversed ? -rotationSpeed : rotationSpeed;
     // angle += currentRotationSpeed;
     angle += reversed ? -rotationSpeed : rotationSpeed;
+    
 
 
     const rotatedPoints = points.map(point => {
@@ -164,10 +167,25 @@ function draw() {
         context.fill();
     });
 
-    for (let p = 0; p < 4; p++) {
-        connect_points(p, (p + 1) % 4, projectedPoints);
-        connect_points(p, 4, projectedPoints);
-        connect_points(p, 5, projectedPoints);
+    if (shape === 'pyramid') {
+        for (let p = 0; p < 4; p++) {
+            connect_points(p, (p + 1) % 4, projectedPoints);
+            connect_points(p, 4, projectedPoints);  
+            connect_points(p, 5, projectedPoints);  
+        }
+    } else if (shape === 'cube') {
+        // Connect bottom face
+        for (let p = 0; p < 4; p++) {
+            connect_points(p, (p + 1) % 4, projectedPoints);
+        }
+        // Connect top face
+        for (let p = 4; p < 8; p++) {
+            connect_points(p, (p + 1) % 4 + 4, projectedPoints);
+        }
+        // Connect vertical edges
+        for (let p = 0; p < 4; p++) {
+            connect_points(p, p + 4, projectedPoints);
+        }
     }
 
     requestAnimationFrame(draw);
