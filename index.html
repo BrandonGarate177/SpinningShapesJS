@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,8 +20,59 @@
     <div id="controls">
         <button onclick="changeShape('pyramid')">Pyramid</button>
         <button onclick="changeShape('cube')">Cube</button>
+        <button onclick="changeReverse('reverse')">reverse</button>
     </div>
     <canvas id="pyramidCanvas" width="800" height="600"></canvas>
+
+    <script src="pyramid.js"></script>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shape Rotation</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background: black;
+        }
+        canvas {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #controls {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <button onclick="changeShape('pyramid')">Pyramid</button>
+        <button onclick="changeShape('cube')">Cube</button>
+        <button onclick="changeReverse('reverse')">Reverse</button>
+        
+    </div>
+    <canvas id="pyramidCanvas"></canvas>
     <script src="pyramid.js"></script>
 </body>
 </html>
+

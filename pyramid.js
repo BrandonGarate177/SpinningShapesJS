@@ -8,8 +8,10 @@ const BLACK = 'rgb(0,0,0)';
 const RED = 'rgb(255, 0, 0)';
 const BLUE = 'rgb(15, 15, 255)';
 
-const width = canvas.width; 
-const height = canvas.height; 
+const width = window.innerWidth; 
+const height = window.innerHeight; 
+canvas.width = width; 
+canvas.height = height; 
 // this is because the canvas already has its own diseginated size 
 
 
@@ -22,6 +24,8 @@ let points = []; // points will be an array that contains arrays aight
 
 let reversed = false; 
 let shape;
+
+let fakeReversed;
 
 
 let start_Time = Date.now(); 
@@ -49,6 +53,10 @@ function changeShape(newShape) {
         points.push([-1, 1, 1]);
     }
     console.log('Shape changed to:', shape);
+}
+function changeReverse(temp){
+    reversed = !reversed;
+    start_Time = Date.now();
 }
 
 changeShape('pyramid');
