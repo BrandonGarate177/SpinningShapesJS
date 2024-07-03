@@ -6,60 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shape Rotation</title>
 
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            background: black;
-        }
-        canvas {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        #controls {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-            text-align: center;
-        }
-        #elapsed-time {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            /* transform: translateX(-50%); */
-            color: white;
-            font-size: 20px;
-            z-index: 1;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            font-size: 16px;
-        }
-    </style>
-    
+    <link rel="stylesheet" href = "styles.css">
 </head>
 <body>
-    <div id="controls">
-        <button onclick="changeShape('pyramid')">Pyramid</button>
-        <button onclick="changeShape('cube')">Cube</button>
-        <button onclick="changeReverse('reverse')">Reverse</button>
-        
-    </div>
+    <nav id = "everything">
 
-    <div id="elapsed-time">Elapsed Time: 0s</div>
+        <div id="controls" class="btn-container">
+                <button class = "btn btn-color-1" onclick="changeShape('pyramid')">Pyramid</button>
+                <button class = "btn btn-color-2" onclick="changeShape('cube')">Cube</button>
+                <button class = "btn btn-color-3" onclick="changeReverse('reverse')">Reverse</button>
+        </div>
 
+
+        <div id="elapsed-time" class = "elapsed-time-container">Elapsed Time: 0s</div>
+        <canvas id="pyramidCanvas"></canvas>
+        <script src="pyramid.js"></script>
+
+
+    </nav>
     
-    <canvas id="pyramidCanvas"></canvas>
-    
-    <script src="pyramid.js"></script>
+
+
 </body>
 </html>
 
