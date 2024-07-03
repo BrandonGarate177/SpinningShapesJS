@@ -10,10 +10,10 @@ const BLACK = 'rgb(0,0,0)';
 const RED = 'rgb(255, 0, 0)';
 const BLUE = 'rgb(15, 15, 255)';
 
-const width = window.innerWidth; 
-const height = window.innerHeight; 
-canvas.width = width; 
-canvas.height = height; 
+let width = window.innerWidth;
+let height = window.innerHeight;
+canvas.width = width;
+canvas.height = height;
 // this is because the canvas already has its own diseginated size 
 
 
@@ -138,7 +138,18 @@ function project(points) {
 }
 
 
-
+function drawFace(points, color) {
+    context.beginPath();
+    context.moveTo(points[0][0], points[0][1]);
+    for (let i = 1; i < points.length; i++) {
+        context.lineTo(points[i][0], points[i][1]);
+    }
+    context.closePath();
+    context.fillStyle = color;
+    context.fill();
+    context.strokeStyle = color;
+    context.stroke();
+}
 
 function draw() {
     context.clearRect(0, 0, width, height);
@@ -183,25 +194,43 @@ function draw() {
         context.fill();
     });
 
+    // if (shape === 'pyramid') {
+    //     for (let p = 0; p < 4; p++) {
+    //         connect_points(p, (p + 1) % 4, projectedPoints);
+    //         connect_points(p, 4, projectedPoints);  
+    //         connect_points(p, 5, projectedPoints);  
+    //     }
+    // } else if (shape === 'cube') {
+    //     // Connect bottom face
+    //     for (let p = 0; p < 4; p++) {
+    //         connect_points(p, (p + 1) % 4, projectedPoints);
+    //     }
+    //     // Connect top face
+    //     for (let p = 4; p < 8; p++) {
+    //         connect_points(p, (p + 1) % 4 + 4, projectedPoints);
+    //     }
+    //     // Connect vertical edges
+    //     for (let p = 0; p < 4; p++) {
+    //         connect_points(p, p + 4, projectedPoints);
+    //     }
+    // }
+
     if (shape === 'pyramid') {
-        for (let p = 0; p < 4; p++) {
-            connect_points(p, (p + 1) % 4, projectedPoints);
-            connect_points(p, 4, projectedPoints);  
-            connect_points(p, 5, projectedPoints);  
-        }
+        drawFace([projectedPoints[0], projectedPoints[1], projectedPoints[4]], RED);
+        drawFace([projectedPoints[1], projectedPoints[2], projectedPoints[4]], RED);
+        drawFace([projectedPoints[2], projectedPoints[3], projectedPoints[4]], RED);
+        drawFace([projectedPoints[3], projectedPoints[0], projectedPoints[4]], RED);
+        drawFace([projectedPoints[0], projectedPoints[1], projectedPoints[5]], BLUE);
+        drawFace([projectedPoints[1], projectedPoints[2], projectedPoints[5]], BLUE);
+        drawFace([projectedPoints[2], projectedPoints[3], projectedPoints[5]], BLUE);
+        drawFace([projectedPoints[3], projectedPoints[0], projectedPoints[5]], BLUE);
     } else if (shape === 'cube') {
-        // Connect bottom face
-        for (let p = 0; p < 4; p++) {
-            connect_points(p, (p + 1) % 4, projectedPoints);
-        }
-        // Connect top face
-        for (let p = 4; p < 8; p++) {
-            connect_points(p, (p + 1) % 4 + 4, projectedPoints);
-        }
-        // Connect vertical edges
-        for (let p = 0; p < 4; p++) {
-            connect_points(p, p + 4, projectedPoints);
-        }
+        drawFace([projectedPoints[0], projectedPoints[1], projectedPoints[2], projectedPoints[3]], RED);
+        drawFace([projectedPoints[4], projectedPoints[5], projectedPoints[6], projectedPoints[7]], RED);
+        drawFace([projectedPoints[0], projectedPoints[1], projectedPoints[5], projectedPoints[4]], BLUE);
+        drawFace([projectedPoints[1], projectedPoints[2], projectedPoints[6], projectedPoints[5]], BLUE);
+        drawFace([projectedPoints[2], projectedPoints[3], projectedPoints[7], projectedPoints[6]], BLUE);
+        drawFace([projectedPoints[3], projectedPoints[0], projectedPoints[4], projectedPoints[7]], BLUE);
     }
 
     requestAnimationFrame(draw);
